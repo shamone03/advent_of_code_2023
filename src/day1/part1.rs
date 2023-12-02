@@ -28,6 +28,9 @@ pub fn part1() -> u32 {
                 }
             }
 
+            if first != ' ' && last != ' ' {
+                break;
+            }
 
         }
         sum += first.to_digit(10).expect("bad digit") * 10 + last.to_digit(10).expect("bad digit");

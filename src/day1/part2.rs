@@ -20,7 +20,7 @@ pub fn part2() -> u32 {
         for i in 0..line.len() {
             let front: char = line[i] as char;
             let back: char = line[line.len() - 1 - i] as char;
-            
+
             if first == 99 {
                 if front.is_numeric() {
                     first = front.to_digit(10).expect("bad digit");
@@ -51,6 +51,9 @@ pub fn part2() -> u32 {
                 }
             }
             
+            if first != 99 && last != 99 {
+                break;
+            }
         }
         
         sum += first * 10 + last;
