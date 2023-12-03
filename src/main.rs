@@ -1,6 +1,6 @@
 pub mod day1;
-use crate::day1::{part1::part1, part2::part2};
+pub mod day2;
 
 fn main() {
-    println!("{}", part2());
+    println!("{}", day2::part1::part1());
 }

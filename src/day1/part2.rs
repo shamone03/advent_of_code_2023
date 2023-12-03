@@ -2,7 +2,7 @@ use super::get_input::get_input;
 
 pub fn part2() -> u32 {
 
-    let lines = get_input();
+    let lines = get_input("day1".to_string());
     let mut first: u32 = 99;
     let mut last: u32 = 99;
 

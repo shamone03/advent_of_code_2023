@@ -3,8 +3,9 @@ use std::io::Read;
 use std::path::Path;
 use std::env;
 
-pub fn get_input() -> Vec<String> {
-    let path = Path::new("input/day1/input.txt");
+pub fn get_input(day: String) -> Vec<String> {
+    let path: String = format!("input/{day}/input.txt");
+    let path = Path::new(path.as_str());
     let curdir = env::current_dir().expect("cannot find cur dir");
     let path = curdir.join(path);
 
