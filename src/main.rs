@@ -1,6 +1,7 @@
 pub mod day1;
 pub mod day2;
+pub mod day3;
 
 fn main() {
-    println!("{}", day2::part2::part2());
+    println!("{}", day3::part1::part1());
 }
