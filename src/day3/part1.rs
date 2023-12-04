@@ -1,9 +1,15 @@
 use crate::day1::get_input::get_input;
 
+struct Interval {
+    min: usize,
+    max: usize
+}
+
 pub fn part1() -> u32 {
     let mut sum = 0;
 
     let lines = get_input("day3".to_string());
+    let mut intervals: Vec<Interval> = vec![];
 
     for i in 1..lines.len() {
         let cur_line = &lines[i - 1].to_owned();
@@ -11,36 +17,20 @@ pub fn part1() -> u32 {
         let mut keep: bool;
 
 
-        for j in 2..pre_line.len() {
-            let cur_cc: char = cur_line.as_bytes()[j - 1] as char;
-
-            let pre_lc = pre_line.as_bytes()[j - 2] as char;
-            let pre_cc = pre_line.as_bytes()[j - 1] as char;
-            let pre_rc = pre_line.as_bytes()[j] as char;
-
-            if !cur_cc.is_numeric() && cur_cc != '.' {
-                let left: bool = pre_lc.is_numeric(); // left diag match
-                let right: bool = pre_rc.is_numeric(); // right diag match;
-
-                keep = pre_cc.is_numeric() || left || right;
-                if keep {
-                    sum += get_num(pre_line.to_string(), j - 2);
-                }
+        for j in 0..pre_line.len() {
+            let c: char = pre_line.as_bytes()[j] as char;
+            let mut inter: Interval = Interval { min: 999, max: 999 };
+            if inter.min != 999 && c.is_numeric() {
+                inter.min = j;
             }
-
-            if cur_cc.is_numeric() {
-                
-                let left: bool = !pre_lc.is_numeric() && pre_lc != '.'; // left diag match
-                let right: bool = !pre_rc.is_numeric() && pre_rc != '.'; // right diag match;
-
-                keep = !pre_cc.is_numeric() && pre_cc != '.' || left || right;
-                if keep {
-                    sum += get_num(cur_line.to_string(), j - 2);
-                }
+            if inter.min != 999 && !c.is_numeric() {
+                inter.max = j;
+                intervals.push(inter);
+                inter = Interval { min: 999, max: 999 };
             }
-
         }
-        
+        intervals.clear();
+        println!("{}", intervals.len());
     }
 
     sum
@@ -69,4 +59,12 @@ fn get_num(line: String, start: usize) -> u32 {
     };
 
     num
+}
+
+fn check_interval(min: u32, max: u32, i: u32) -> bool {
+    if i >= (min - 1) && i <= (max + 1) {
+        true
+    } else {
+        false
+    }
 }
